@@ -12,7 +12,7 @@ node_modules
 dist
 dist-ssr
 *.local
-playwright.config.{js,cjs,mjs}
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -25,6 +25,7 @@ playwright.config.{js,cjs,mjs}
 *.sw?
 
 # Test
+playwright.config.*
 **/playwright-report
 **/test-results
 **/tests
