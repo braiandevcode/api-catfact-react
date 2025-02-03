@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getImagesCat } from '../services/facts';
-import { DATA_API } from '../constants';
+import { getImagesCat } from '../services/queryCats';
 
 // CUSTOM HOOKS
 export function useImageCat({ fact  }) {
-  const { API_CATS_IMAGES } = DATA_API; //DESESTRUCTURAMOS OBJETO
   // ESTADOS
   const [imageURL, setImageURL] = useState(null);
   const [errorImage, setError] = useState(null);
@@ -12,12 +10,15 @@ export function useImageCat({ fact  }) {
   const [firstWord, setFirstWord] = useState(null);
 
   // Función para obtener la imagen
-  const handleGetImageCat = async (url) => {
-    const { image, error} = await getImagesCat(url);
+  const handleGetImageCat = async (FIRST_WORD) => {
+    const { image, error} = await getImagesCat(FIRST_WORD);
+    console.log({ image, error }); // Verifica la respuesta de la API
+    
     if (error) {
       setIsError(true);
       setError(error);
     } else {
+      setIsError(false);
       setImageURL(image);
     }
   };
@@ -26,9 +27,9 @@ export function useImageCat({ fact  }) {
   useEffect(() => {
     if (!fact) return;
     const FIRST_WORD = fact.split(' ')[0]; //PRIMER PALABRA DE ORACIÓN
-    const IMAGE_CAT_URL = `${API_CATS_IMAGES}/cat/says/${FIRST_WORD ?? 'hello'}?fontSize=50&fontColor=red`;
+    handleGetImageCat(FIRST_WORD);
     setFirstWord(FIRST_WORD);
-    handleGetImageCat(IMAGE_CAT_URL);
+    console.log(imageURL);
   }, [fact]);
 
   return { imageURL, errorImage, isErrorImage, firstWord };

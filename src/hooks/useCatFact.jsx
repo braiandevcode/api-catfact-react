@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getRandomFact } from '../services/facts';
+import { getRandomFact } from '../services/queryCats';
 
 export function useCatFact() {
   // ESTADOS
@@ -13,6 +13,7 @@ export function useCatFact() {
       setIsError(true);
       setError(error);
     } else {
+      setIsError(false);
       setFact(fact);
     }
   };

@@ -4,11 +4,11 @@ import { useCatFact } from '../hooks/useCatFact.jsx';
 
 export function FactRandom() {
   const { fact, error, isError, refreshFact} = useCatFact(); //cuando no lleva parametros es que no tiene dependencias
-  const { imageURL, isErrorImage, errorImage, firstWord } = useImageCat({fact}); //USO DEL CUSTOM HOOK
+  const { imageURL, isErrorImage, errorImage, firstWord } = useImageCat({ fact }); //USO DEL CUSTOM HOOK
 
   // Función para obtener y establecer un hecho aleatorio
   const handleClickRandomFact =async ()=>{
-    refreshFact();
+    await refreshFact();
   };
 
   //RENDER
@@ -18,12 +18,12 @@ export function FactRandom() {
       <button type="button" onClick={handleClickRandomFact}>
         Obtener info de Gatos.
       </button>
-      <ModalError
+      { isError && <ModalError
         error={error}
         isError={isError}
         isErrorImage={isErrorImage}
         errorImage={errorImage}
-      />
+      />}
       {fact && <p>{fact}</p>}
       {imageURL && (
         <img
