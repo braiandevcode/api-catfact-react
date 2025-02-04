@@ -15,7 +15,7 @@ export function FactRandom() {
   return (
     <>
       <h1>Peticiones API de gatos con React</h1>
-      <button type="button" onClick={handleClickRandomFact}>
+      <button type="button" id='changeImageButton' onClick={handleClickRandomFact}>
         Obtener info de Gatos.
       </button>
       { isError && <ModalError
